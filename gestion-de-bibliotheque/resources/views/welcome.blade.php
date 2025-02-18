@@ -44,7 +44,6 @@
             <img src="https://via.placeholder.com/150" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
             <h2 class="text-2xl font-semibold text-gray-800 mb-2">Book Title 1</h2>
             <p class="text-gray-600 mb-4">Author: Author Name 1</p>
-            <p class="text-gray-600 mb-4">Genre: Fiction</p>
             <div class="flex justify-between items-center">
                 <!-- Edit Icon Button -->
                 <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -62,7 +61,6 @@
             <img src="https://via.placeholder.com/150" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
             <h2 class="text-2xl font-semibold text-gray-800 mb-2">Book Title 2</h2>
             <p class="text-gray-600 mb-4">Author: Author Name 2</p>
-            <p class="text-gray-600 mb-4">Genre: Mystery</p>
             <div class="flex justify-between items-center">
                 <!-- Edit Icon Button -->
                 <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
