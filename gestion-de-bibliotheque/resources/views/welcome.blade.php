@@ -46,7 +46,8 @@
 
     <div id="addBookForm" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 absolute z-10 justify-center items-center w-1/2 transform translate-x-[-50%] left-1/2 top-1/4">
         <h2 class="text-3xl font-semibold text-gray-800 mb-4">Add a New Book</h2>
-        <form id="bookForm" class="space-y-4">
+        <form id="bookForm" action="/CreateBook" method="POST" class="space-y-4">
+            @csrf
             <div>
                 <label for="bookTitle" class="block text-gray-700">Book Title</label>
                 <input type="text" id="bookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
@@ -63,20 +64,30 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        <!-- Example Book Card -->
-        <div class="bg-white bg-opacity-70 p-6 rounded-lg shadow-lg backdrop-blur-lg transform hover:scale-105 transition-transform duration-300">
-            <img src="https://via.placeholder.com/150" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Book Title 1</h2>
-            <p class="text-gray-600 mb-4">Author: Author Name 1</p>
-            <div class="flex justify-between items-center">
-                <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
+        <!-- Loop through books -->
+        @foreach($books as $book)
+            <div class="bg-white bg-opacity-70 p-6 rounded-lg shadow-lg backdrop-blur-lg transform hover:scale-105 transition-transform duration-300">
+                <!-- Book Cover Image -->
+                <img src="{{ $book->cover_url }}" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
+
+                <!-- Book Title -->
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ $book->title }}</h2>
+
+                <!-- Author Info -->
+                <p class="text-gray-600 mb-4">{{ $book->author->name}}</p>
+
+                <div class="flex justify-between items-center">
+                    <!-- Edit Button -->
+                    <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <button class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
 </div>
 
