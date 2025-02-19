@@ -81,10 +81,13 @@
                     <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                         <i class="fas fa-edit"></i>
                     </button>
-
-                    <button class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <form action="/DeleteBook" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$book->id}}">
+                    <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                         <i class="fas fa-trash-alt"></i>
                     </button>
+                    </form>
                 </div>
             </div>
         @endforeach
