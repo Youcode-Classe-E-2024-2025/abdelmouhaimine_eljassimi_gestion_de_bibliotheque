@@ -15,31 +15,19 @@
         <div class="relative">
             <input type="text" name="name" id="name" placeholder="Full Name" required
                    class="w-full px-4 py-3 bg-white bg-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 text-white placeholder-gray-200">
-            <label for="name" class="absolute left-4 top-3 text-gray-200 transition-all duration-300 pointer-events-none">
-                Full Name
-            </label>
         </div>
         <div class="relative">
             <input type="email" name="email" id="email" placeholder="Email" required
                    class="w-full px-4 py-3 bg-white bg-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 text-white placeholder-gray-200">
-            <label for="email" class="absolute left-4 top-3 text-gray-200 transition-all duration-300 pointer-events-none">
-                Email
-            </label>
         </div>
         <div class="relative">
             <input type="password" name="password" id="password" placeholder="Password" required
                    class="w-full px-4 py-3 bg-white bg-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 text-white placeholder-gray-200">
-            <label for="password" class="absolute left-4 top-3 text-gray-200 transition-all duration-300 pointer-events-none">
-                Password
-            </label>
         </div>
 
         <div class="relative">
             <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required
                    class="w-full px-4 py-3 bg-white bg-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 text-white placeholder-gray-200">
-            <label for="password" class="absolute left-4 top-3 text-gray-200 transition-all duration-300 pointer-events-none">
-                Password
-            </label>
         </div>
         <button type="submit"
                 class="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">

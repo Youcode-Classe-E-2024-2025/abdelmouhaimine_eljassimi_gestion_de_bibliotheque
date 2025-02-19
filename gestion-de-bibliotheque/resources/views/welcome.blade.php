@@ -8,7 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-teal-500 to-emerald-600 min-h-screen flex flex-col items-center justify-center py-12">
-
 <div class="w-full max-w-6xl bg-white p-8 rounded-3xl shadow-2xl backdrop-blur-lg">
 
     <h1 class="text-4xl font-bold text-gray-800 text-center mb-6">Library Dashboard</h1>

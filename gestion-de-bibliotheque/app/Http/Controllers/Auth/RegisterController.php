@@ -30,9 +30,8 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),  // Ensure password is hashed
+            'password' => Hash::make($request->password),
         ]);
-
-        return redirect()->route('/login');
+        return redirect('/login');
     }
 }
