@@ -8,6 +8,7 @@ use App\Http\Controllers\BookController;
 
 Route::get('/', [BookController::class, 'index']);
 Route::post('DeleteBook', [BookController::class, 'Delete']);
+Route::post('EditBook', [BookController::class, 'Edit']);
 
 Route::get('login', [UserController::class, 'showLoginForm']);
 Route::post('login', [UserController::class, 'login']);

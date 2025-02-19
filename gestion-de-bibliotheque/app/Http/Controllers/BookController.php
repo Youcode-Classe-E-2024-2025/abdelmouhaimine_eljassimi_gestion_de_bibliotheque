@@ -45,4 +45,29 @@ class BookController extends Controller
         $book->delete();
         return redirect('/');
     }
+
+    public function Edit(Request $request)
+    {
+
+        $request->validate([
+            'id' => 'required|exists:books,id',
+            'bookTitle' => 'required|string|max:255',
+            'bookCover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $book = Book::find($request->id);
+
+
+        $book->title = $request->bookTitle;
+
+        if ($request->hasFile('bookCover')) {
+
+            $imagePath = $request->file('bookCover')->store('images', 'public');
+            $book->cover_url = $imagePath;
+        }
+
+        $book->save();
+        return redirect('/');
+    }
+
 }
