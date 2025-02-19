@@ -62,23 +62,41 @@
             </div>
         </form>
     </div>
+    <div id="editBookForm" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 absolute z-10 justify-center items-center w-1/2 transform translate-x-[-50%] left-1/2 top-1/4">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Edit Book</h2>
+        <form id="bookForm" action="/CreateBook" method="POST" class="space-y-4" enctype="multipart/form-data">
+            @csrf
+            <div>
+                <label for="bookTitle" class="block text-gray-700">Book Title</label>
+                <input type="text" id="EditbookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
+            </div>
+            <div>
+                <label for="bookCover" class="block text-gray-700">Book Cover URL</label>
+                <input type="file" id="EditbookCover" name="bookCover" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book cover URL" required>
+            </div>
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="bg-teal-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Edit Book</button>
+                <button type="button" id="cancelEditBook" class="ml-4 bg-gray-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Cancel</button>
+            </div>
+        </form>
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <!-- Loop through books -->
         @foreach($books as $book)
             <div class="bg-white bg-opacity-70 p-6 rounded-lg shadow-lg backdrop-blur-lg transform hover:scale-105 transition-transform duration-300">
                 <!-- Book Cover Image -->
-                <img src="storage/{{ $book->cover_url }}" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
+                <img id="cover" src="storage/{{ $book->cover_url }}" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
 
                 <!-- Book Title -->
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ $book->title }}</h2>
+                <h2 id="booktitle" class="text-2xl font-semibold text-gray-800 mb-2">{{ $book->title }}</h2>
 
                 <!-- Author Info -->
                 <p class="text-gray-600 mb-4">{{ $book->author->name}}</p>
 
                 <div class="flex justify-between items-center">
                     <!-- Edit Button -->
-                    <button class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <button id="editBook" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                         <i class="fas fa-edit"></i>
                     </button>
                     <form action="/DeleteBook" method="POST">
@@ -102,6 +120,25 @@
     document.getElementById('cancelAddBook').addEventListener('click', function() {
         document.getElementById('addBookForm').classList.add('hidden');
     });
+
+    document.getElementById('cancelEditBook').addEventListener('click', function() {
+        document.getElementById('editBookForm').classList.add('hidden');
+    });
+
+    document.querySelectorAll("#editBook").forEach(button => {
+        button.addEventListener("click", function () {
+            document.getElementById('editBookForm').classList.remove('hidden');
+
+            let bookTitle = document.querySelector("#booktitle").textContent;
+            let bookCover = document.querySelector("#cover").src;
+
+            document.getElementById("EditbookTitle").value = bookTitle;
+            document.getElementById("EditbookCover").setAttribute("data-old-src", bookCover);
+
+            document.getElementById("editBookForm").classList.remove("hidden");
+        });
+    });
+
 </script>
 
 </body>
