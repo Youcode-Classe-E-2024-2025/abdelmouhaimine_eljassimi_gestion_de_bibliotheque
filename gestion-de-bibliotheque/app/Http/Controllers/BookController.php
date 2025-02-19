@@ -18,15 +18,23 @@ class BookController extends Controller
     }
     public function create(Request $request)
     {
-        $validated = $request->validate([
+
+        $request->validate([
             'bookTitle' => 'required|string|max:255',
-            'bookCover' => 'required|url',
+            'bookCover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $path = null;
+        if ($request->hasFile('bookCover')) {
+            $path = $request->file('bookCover')->store('images', 'public');
+        }
+
+
+
         Book::create([
-            'title' => $validated['bookTitle'],
-            'cover_url' => $validated['bookCover'],
-            'user_id' => Auth::id()
+            'title' => $request->bookTitle,
+            'cover_url' => $path,
+            'user_id' => auth()->user()->id
         ]);
 
         return redirect('/');
