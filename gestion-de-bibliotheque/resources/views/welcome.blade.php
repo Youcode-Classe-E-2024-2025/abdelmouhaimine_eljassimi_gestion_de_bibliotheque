@@ -21,6 +21,18 @@
                     <a href="/admin" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Admin</a>
                 </div>
             </div>
+            <div class="flex items-center space-x-4">
+                @if(auth()->check())
+                    <span class="text-gray-700">Welcome, {{ auth()->user()->name }}!</span>
+                    <a href="/logout" type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600">
+                        Logout
+                    </a>
+                @else
+                    <a href="/login" class="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600">
+                        Login
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
 </nav>
@@ -35,8 +47,14 @@
             <img src="storage/{{ $book->cover_url }}" alt="" class="w-full h-56 object-cover">
             <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $book->title }}</h3>
-                <p class="text-gray-600 mb-4">{{ $book->author->name}}</p>
-                <a href="{{$book->id}}" class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 transition duration-300">Reserve</a>
+                <p class="text-gray-600 mb-4">{{ $book->author}}</p>
+                @if($book->status != "reserved" || $book->user_id == null)
+                    <a href="/reserver/{{$book->id}}" class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 transition duration-300">Reserve</a>
+                @elseif($book->user_id == auth()->user()->id)
+                    <a href="/return/{{$book->id}}" class="bg-yellow-200 text-yellow-400 px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300">Return</a>
+                @else
+                    <button class="bg-red-200 text-red-400 px-4 py-2 rounded-md hover:bg-red-600 transition duration-300">Already Token</button>
+                @endif
             </div>
         </div>
         @endforeach

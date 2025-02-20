@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ReservationController;
 
 
 Route::get('admin', [BookController::class, 'admin']);
@@ -18,3 +19,7 @@ Route::get('logout', [UserController::class, 'logout']);
 
 
 Route::post('CreateBook', [BookController::class, 'Create']);
+
+
+Route::get('/reserver/{id}', [ReservationController::class, 'reserve']);
+Route::get('/return/{id}', [ReservationController::class, 'cancelReservation']);

@@ -39,7 +39,7 @@ class BookController extends Controller
         Book::create([
             'title' => $request->bookTitle,
             'cover_url' => $path,
-            'user_id' => auth()->user()->id
+            'author' => $request->author,
         ]);
 
         return redirect('/admin');

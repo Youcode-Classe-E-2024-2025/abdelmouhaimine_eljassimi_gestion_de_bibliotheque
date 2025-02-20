@@ -21,6 +21,18 @@
                     <a href="/admin" class="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Admin</a>
                 </div>
             </div>
+            <div class="flex items-center space-x-4">
+                @if(auth()->check())
+                    <span class="text-gray-700">Welcome, {{ auth()->user()->name }}!</span>
+                    <a href="/logout" type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600">
+                        Logout
+                    </a>
+                @else
+                    <a href="/login" class="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600">
+                        Login
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
 </nav>
@@ -46,14 +58,14 @@
                 <tr>
                     <th id="idBook" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->id }}</th>
                     <th id="booktitle" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->title }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->author->name}}</th>
-                    <th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->author}}</th>
+                    <th class="flex">
                         <button class="editBook text-teal-500 px-4 py-2 rounded-md hover:bg-teal-600 transition duration-300">Edit</button>
                         <form action="/DeleteBook" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{$book->id}}">
-                            <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <i class="fas fa-trash-alt"></i>
+                            <button type="submit" class=" text-red-500 font-bold py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white shadow-lg transition-shadow duration-300">
+                                Delete
                             </button>
                         </form>
                     </th>
@@ -74,6 +86,10 @@
             <input type="text" id="bookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
         </div>
         <div>
+            <label for="author" class="block text-gray-700">Author name</label>
+            <input type="text" id="author_name" name="author" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
+        </div>
+        <div>
             <label for="bookCover" class="block text-gray-700">Book Cover URL</label>
             <input type="file" id="bookCover" name="bookCover" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book cover URL" required>
         </div>
@@ -92,6 +108,10 @@
         <div>
             <label for="bookTitle" class="block text-gray-700">Book Title</label>
             <input type="text" id="EditbookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
+        </div>
+        <div>
+            <label for="author" class="block text-gray-700">Author name</label>
+            <input type="text" id="author_name" name="author" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
         </div>
         <div>
             <label for="bookCover" class="block text-gray-700">Book Cover URL</label>
