@@ -10,10 +10,6 @@ public function reserve($id)
 {
 $book = Book::findOrFail($id);
 
-if ($book->isReserved()) {
-return redirect()->back()->with('error', 'Ce livre est déjà réservé.');
-}
-
 $book->update([
 'status' => 'reserved',
 'user_id' => auth()->user()->id,

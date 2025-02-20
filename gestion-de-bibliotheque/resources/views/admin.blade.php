@@ -50,6 +50,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">id</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
             </thead>
@@ -59,12 +60,13 @@
                     <th id="idBook" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->id }}</th>
                     <th id="booktitle" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->title }}</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->author}}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $book->status}}</th>
                     <th class="flex">
                         <button class="editBook text-teal-500 px-4 py-2 rounded-md hover:bg-teal-600 transition duration-300">Edit</button>
                         <form action="/DeleteBook" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{$book->id}}">
-                            <button type="submit" class=" text-red-500 font-bold py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white shadow-lg transition-shadow duration-300">
+                            <button type="submit" class=" text-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition duration-300">
                                 Delete
                             </button>
                         </form>
