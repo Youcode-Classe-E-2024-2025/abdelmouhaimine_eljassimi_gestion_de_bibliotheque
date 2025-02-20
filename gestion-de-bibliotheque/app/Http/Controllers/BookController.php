@@ -16,6 +16,11 @@ class BookController extends Controller
         $books = Book::with('author')->get();
         return view('welcome', ['books' => $books]);
     }
+    public function admin(){
+        $books = Book::with('author')->get();
+        return view('admin', ['books' => $books]);
+    }
+
     public function create(Request $request)
     {
 
@@ -37,13 +42,13 @@ class BookController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return redirect('/');
+        return redirect('/admin');
     }
 
     public function Delete(Request $request){
         $book = Book::find($request->id);
         $book->delete();
-        return redirect('/');
+        return redirect('/admin');
     }
 
     public function Edit(Request $request)
@@ -67,7 +72,7 @@ class BookController extends Controller
         }
 
         $book->save();
-        return redirect('/');
+        return redirect('/admin');
     }
 
 }

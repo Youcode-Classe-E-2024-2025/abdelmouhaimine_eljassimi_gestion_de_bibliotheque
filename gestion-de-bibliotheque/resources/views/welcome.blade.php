@@ -3,148 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Library Manager</title>
+    <title>Library Manager - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-teal-500 to-emerald-600 min-h-screen flex flex-col items-center justify-center py-12">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-<!-- Navbar -->
-<nav class="w-full bg-white shadow-md fixed top-0 left-0">
-    <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
-            <!-- Logo -->
-            <a href="#" class="text-2xl font-bold text-teal-600">Library Manager</a>
-
-            <!-- User Info -->
-            <div class="flex items-center space-x-4">
-                @if(auth()->check())
-                    <span class="text-gray-700">Welcome, {{ auth()->user()->name }}!</span>
-                        <a href="/logout" type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600">
-                            Logout
-                        </a>
-                @else
-                    <a href="/login" class="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600">
-                        Login
-                    </a>
-                @endif
+<nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-teal-600">Library Manager</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/" class="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                    <a href="/admin" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Admin</a>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- Main Content -->
-<div class="w-full max-w-6xl bg-white p-8 rounded-3xl shadow-2xl backdrop-blur-lg mt-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Available Books</h1>
 
-    <h1 class="text-4xl font-bold text-gray-800 text-center mb-6">Library Dashboard</h1>
-
-    <div class="text-center mb-6">
-        <button id="showAddBookFormBtn" class="bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            Add a New Book
-        </button>
-    </div>
-
-    <div id="addBookForm" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 absolute z-10 justify-center items-center w-1/2 transform translate-x-[-50%] left-1/2 top-1/4">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Add a New Book</h2>
-        <form id="bookForm" action="/CreateBook" method="POST" class="space-y-4" enctype="multipart/form-data">
-            @csrf
-            <div>
-                <label for="bookTitle" class="block text-gray-700">Book Title</label>
-                <input type="text" id="bookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
-            </div>
-            <div>
-                <label for="bookCover" class="block text-gray-700">Book Cover URL</label>
-                <input type="file" id="bookCover" name="bookCover" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book cover URL" required>
-            </div>
-            <div class="flex justify-end mt-4">
-                <button type="submit" class="bg-teal-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Add Book</button>
-                <button type="button" id="cancelAddBook" class="ml-4 bg-gray-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Cancel</button>
-            </div>
-        </form>
-    </div>
-    <div id="editBookForm" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 absolute z-10 justify-center items-center w-1/2 transform translate-x-[-50%] left-1/2 top-1/4">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Edit Book</h2>
-        <form id="bookForm" action="/EditBook" method="POST" class="space-y-4" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" id="EditbookId" name="id" value="">
-            <div>
-                <label for="bookTitle" class="block text-gray-700">Book Title</label>
-                <input type="text" id="EditbookTitle" name="bookTitle" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book title" required>
-            </div>
-            <div>
-                <label for="bookCover" class="block text-gray-700">Book Cover URL</label>
-                <input type="file" id="EditbookCover" name="bookCover" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Enter book cover URL" required>
-            </div>
-            <div class="flex justify-end mt-4">
-                <button type="submit" class="bg-teal-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Edit Book</button>
-                <button type="button" id="cancelEditBook" class="ml-4 bg-gray-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        <!-- Loop through books -->
-        @foreach($books as $book)
-            <div class="bg-white bg-opacity-70 p-6 rounded-lg shadow-lg backdrop-blur-lg transform hover:scale-105 transition-transform duration-300">
-                <input type="hidden" id="bookId" name="id" value="{{$book->id}}">
-                <!-- Book Cover Image -->
-                <img id="cover" src="storage/{{ $book->cover_url }}" alt="Book Cover" class="w-full h-48 object-cover rounded-lg mb-4">
-
-                <!-- Book Title -->
-                <h2 id="booktitle" class="text-2xl font-semibold text-gray-800 mb-2">{{ $book->title }}</h2>
-
-                <!-- Author Info -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="bookContainer">
+        <!-- Books will be dynamically added here -->
+    @foreach($books as $book)
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img src="storage/{{ $book->cover_url }}" alt="" class="w-full h-56 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $book->title }}</h3>
                 <p class="text-gray-600 mb-4">{{ $book->author->name}}</p>
-
-                <div class="flex justify-between items-center">
-
-                    <!-- Edit Button -->
-                    <button id="editBook" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <i class="fas fa-edit"></i>
-                    </button>
-
-                    <form action="/DeleteBook" method="POST">
-                        @csrf
-                        <input type="hidden" name="id" value="{{$book->id}}">
-                    <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                    </form>
-                </div>
+                <a href="{{$book->id}}" class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 transition duration-300">Reserve</a>
             </div>
+        </div>
         @endforeach
     </div>
 </div>
 
 <script>
-    document.getElementById('showAddBookFormBtn').addEventListener('click', function() {
-        document.getElementById('addBookForm').classList.remove('hidden');
-    });
-
-    document.getElementById('cancelAddBook').addEventListener('click', function() {
-        document.getElementById('addBookForm').classList.add('hidden');
-    });
-
-    document.getElementById('cancelEditBook').addEventListener('click', function() {
-        document.getElementById('editBookForm').classList.add('hidden');
-    });
-
-    document.querySelectorAll("#editBook").forEach(button => {
-        button.addEventListener("click", function () {
-            document.getElementById('editBookForm').classList.remove('hidden');
-
-            let bookTitle = document.querySelector("#booktitle").textContent;
-            let bookCover = document.querySelector("#cover").src;
-            let bookId = document.querySelector("#bookId").value;
-
-            document.getElementById("EditbookTitle").value = bookTitle;
-            document.getElementById("EditbookId").value = bookId;
-            document.getElementById("EditbookCover").setAttribute("data-old-src", bookCover);
-
-            document.getElementById("editBookForm").classList.remove("hidden");
-        });
-    });
-
 </script>
 
 </body>

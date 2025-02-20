@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\BookController;
 
 
-
+Route::get('admin', [BookController::class, 'admin']);
 Route::get('/', [BookController::class, 'index']);
 Route::post('DeleteBook', [BookController::class, 'Delete']);
 Route::post('EditBook', [BookController::class, 'Edit']);
